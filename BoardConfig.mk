@@ -105,6 +105,9 @@ TARGET_RECOVERY_FSTAB := \
 TARGET_BOARD_INFO_FILE := \
     $(DEVICE_PATH)/board-info.txt
 
+TARGET_USE_CUSTOM_LUN_FILE_PATH := \
+    /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
+
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 
