@@ -3,12 +3,8 @@
 # Copyright (C) 2026 chkndrp
 # SPDX-License-Identifier: GPL-3.0-only
 
-# Load batterysecret, and touch drivers/services if they didn't load properly
-
-MODULES_DIR="/vendor/lib/modules"
+# Load batterysecret and kickstart touchfeature if not running
 QCOM_BATTERY_DIR="/sys/class/qcom-battery"
-
-DRIVERS="panel_event_notifier xiaomi_touch goodix_core focaltech_touch"
 TOUCH_SVC_STATUS=$(getprop init.svc.touchfeature-service)
 
 ( # For batterysecret (async)
@@ -17,17 +13,6 @@ TOUCH_SVC_STATUS=$(getprop init.svc.touchfeature-service)
     done
     setprop vendor.qcom_battery.initialized true
 ) &
-
-for d in $DRIVERS;
-    do
-        lsmod | grep -q "^$d" && continue
-        path=$(find "$MODULES_DIR" -name "$d.ko" | head -n 1)
-        if [ -f "$path" ]; 
-            then 
-                insmod "$path"
-                echo "Force inserted module: $d" >> /tmp/recovery.log
-        fi
-done
 
 if [ "$TOUCH_SVC_STATUS" != "running" ]; 
     then 
