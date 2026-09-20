@@ -19,8 +19,8 @@ do_prop_prep() {
     resetprop ro.boot.verifiedbootstate orange
 }
 
-do_sysctl_tune() {
-	LOGMSG "Tuning sysctl parameters..."
+do_sysfs_tune() {
+	LOGMSG "Tuning sysfs parameters..."
 
     resetprop twrp.temp.cpu_governor "$(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor 2>/dev/null)";
     for governor in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; 
@@ -52,7 +52,7 @@ backup_fox() {
 
 LOGMSG "Running pre-ROM-flash script...";
 do_prop_prep;
-do_sysctl_tune;
+do_sysfs_tune;
 backup_fox "$@";
 sync;
 exit 0;

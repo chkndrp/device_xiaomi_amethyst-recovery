@@ -16,8 +16,8 @@ do_prop_cleanup() {
     resetprop --delete twrp.temp.security_patch 
 }
 
-undo_sysctl_tune() {
-    LOGMSG "Reverting sysctl tune..."
+undo_sysfs_tune() {
+    LOGMSG "Reverting sysfs tune..."
     
     gov=$(resetprop twrp.temp.cpu_governor);
     if [ -n "$gov" ]; 
@@ -36,6 +36,6 @@ undo_sysctl_tune() {
 }
 
 do_prop_cleanup;
-undo_sysctl_tune;
+undo_sysfs_tune;
 sync;
 exit 0;
