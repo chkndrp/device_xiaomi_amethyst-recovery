@@ -1,0 +1,80 @@
+gitlab:
+  enabled: true
+  owner: 'chkndrp'
+  repo: 'device_xiaomi_amethyst-recovery'
+  projectId: 86680464
+  sync:
+    branches:
+      enabled: true
+      protected: true
+      pattern: '*'
+      historySync:
+        enabled: true
+        strategy: 'force-match'
+        createMergeCommits: true
+        mergeMessage: 'Sync: Merge timeline from {source} to {target}'
+    pullRequests:
+      enabled: true
+      autoMerge: false
+      comments:
+        enabled: true
+        attribution:
+          includeAuthor: true
+          includeTimestamp: true
+          includeSourceLink: true
+          format: 'quoted'
+        handleUpdates: true
+        preserveFormatting: true
+        syncReplies: true
+    issues:
+      enabled: true
+      comments:
+        enabled: true
+        attribution:
+          includeAuthor: true
+          includeTimestamp: true
+          includeSourceLink: true
+          format: 'quoted'
+        handleUpdates: true
+        preserveFormatting: true
+        syncReplies: true
+
+github:
+  enabled: true
+  owner: 'chkndrp'
+  repo: 'device_xiaomi_amethyst-recovery'
+  sync:
+    branches:
+      enabled: true
+      protected: true
+      pattern: '*'
+      historySync:
+        enabled: true
+        strategy: 'force-match'
+        createMergeCommits: true
+        mergeMessage: 'Sync: Merge timeline from {source} to {target}'
+    pullRequests:
+      enabled: true
+      autoMerge: false
+      comments:
+        enabled: true
+        attribution:
+          includeAuthor: true
+          includeTimestamp: true
+          includeSourceLink: true
+          format: 'quoted'
+        handleUpdates: true
+        preserveFormatting: true
+        syncReplies: true
+    issues:
+      enabled: true
+      comments:
+        enabled: true
+        attribution:
+          includeAuthor: true
+          includeTimestamp: true
+          includeSourceLink: true
+          format: 'quoted'
+        handleUpdates: true
+        preserveFormatting: true
+        syncReplies: true
