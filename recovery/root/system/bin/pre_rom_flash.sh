@@ -54,4 +54,5 @@ LOGMSG "Running pre-ROM-flash script...";
 do_prop_prep;
 do_sysctl_tune;
 backup_fox "$@";
+sync;
 exit 0;

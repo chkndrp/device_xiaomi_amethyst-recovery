@@ -37,4 +37,5 @@ undo_sysctl_tune() {
 
 do_prop_cleanup;
 undo_sysctl_tune;
+sync;
 exit 0;
