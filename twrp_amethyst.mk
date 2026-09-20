@@ -15,7 +15,6 @@ $(call inherit-product, vendor/twrp/config/common.mk)
 # Import OrangeFox specifics
 $(call inherit-product, device/xiaomi/amethyst/fox_amethyst.mk)
 
-## Device identifier
 PRODUCT_DEVICE := amethyst
 PRODUCT_BRAND := Redmi
 PRODUCT_MODEL := Redmi Note 14 Pro+ 5G

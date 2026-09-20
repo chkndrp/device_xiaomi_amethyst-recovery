@@ -4,6 +4,9 @@
 # Copyright (C) 2026 chkndrp
 # SPDX-License-Identifier: GPL-3.0-only
 
+# The build vars for OrangeFox can be found here:
+# https://gitlab.com/OrangeFox/infrastructure/doc/-/blob/main/dev/build_vars.md
+
 FDEVICE="amethyst"
 
 fox_get_target_device() {
@@ -76,10 +79,6 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ];
     # Use latest "magiskboot" binaries as this is a relatively new device
     export FOX_USE_UPDATED_MAGISKBOOT=1
 
-    # Very interesting, drops the ramdisk image size by ~6MB
-    # While keeping the same boot times. Needs testing.
-    # export FOX_COMPRESS_EXECUTABLES=1
-  
     # CCACHE
     export USE_CCACHE=1
     export CCACHE_EXEC="/usr/bin/ccache"
@@ -100,7 +99,6 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ];
     # Debugging
     ## export FOX_RESET_SETTINGS=0
     ## export FOX_INSTALLER_DEBUG_MODE=1
-    ## OF_REPORT_HARMLESS_MOUNT_ISSUES=1
   else
     if [ -z "$FOX_BUILD_DEVICE" ] && [ -z "$BASH_SOURCE" ] && [ -z "$ZSH_VERSION" ]; 
       then echo "I: This script requires bash or zsh. Not processing $FDEVICE"

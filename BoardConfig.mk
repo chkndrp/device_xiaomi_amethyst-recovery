@@ -4,7 +4,7 @@
 
 DEVICE_PATH := device/xiaomi/amethyst
 
-# Architecture
+# 64-bit-only architecture
 TARGET_ARCH                := arm64
 TARGET_ARCH_VARIANT        := armv8-2a-dotprod
 TARGET_CPU_ABI             := arm64-v8a
@@ -38,13 +38,11 @@ BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE := true
 BOARD_USES_RECOVERY_AS_BOOT :=
 BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT :=
 
-# Use LZ4 Ramdisk compression instead of GZIP
+# Use LZ4 Ramdisk compression instead of GZIP for faster boot
 BOARD_RAMDISK_USE_LZ4 := true
 
-# Verified Boot
+# AVB, Disable hashtree + verification
 BOARD_AVB_ENABLE := true
-
-# Disable hashtree + verification
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
 
 BOARD_AVB_VBMETA_SYSTEM := system
@@ -53,7 +51,7 @@ BOARD_AVB_VBMETA_SYSTEM_ALGORITHM := SHA256_RSA2048
 BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
 BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX_LOCATION := 1
 
-# Allow for building with minimal manifest
+# Fix build errors with missing dependencies
 ALLOW_MISSING_DEPENDENCIES := true
 BUILD_BROKEN_USES_NETWORK := true
 BUILD_BROKEN_DUP_RULES := true
@@ -90,6 +88,11 @@ $(foreach p, $(BOARD_PARTITION_LIST), $(eval BOARD_$(p)IMAGE_FILE_SYSTEM_TYPE :=
 $(foreach p, $(BOARD_PARTITION_LIST), $(eval TARGET_COPY_OUT_$(p) := $(call to-lower, $(p))))
 $(foreach p, $(filter-out SYSTEM, $(BOARD_PARTITION_LIST)), $(eval BOARD_USES_$(p)IMAGE := true))
 
+# Display specifications
+TARGET_SCREEN_HEIGHT  := 2712
+TARGET_SCREEN_DENSITY := 480
+TARGET_SCREEN_WIDTH   := 1220
+
 # Filesystems
 TARGET_USERIMAGES_USE_EXT4    := true
 TARGET_USERIMAGES_USE_F2FS    := true
@@ -113,5 +116,5 @@ TARGET_RECOVERY_QCOM_RTC_FIX := true
 
 # Debugging
 TARGET_USES_LOGD               := true
-#TARGET_RECOVERY_DEVICE_MODULES += strace
-#RECOVERY_BINARY_SOURCE_FILES   += $(TARGET_OUT_EXECUTABLES)/strace
+# TARGET_RECOVERY_DEVICE_MODULES += strace
+# RECOVERY_BINARY_SOURCE_FILES   += $(TARGET_OUT_EXECUTABLES)/strace
