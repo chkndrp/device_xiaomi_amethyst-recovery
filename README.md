@@ -39,5 +39,5 @@ This recovery tree was initially made for `amethyst`. For historical purposes,
 build the `twrp_amethyst` target
 
 ```shell
-lunch twrp_amethyst-ap2a-eng && mka adbd recoveryimage
+lunch twrp_amethyst-bp2a-eng && mka adbd recoveryimage
 ```
