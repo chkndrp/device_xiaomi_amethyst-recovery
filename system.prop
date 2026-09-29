@@ -2,7 +2,6 @@
 fbe.metadata.wrappedkey=true
 
 # Logging
-persist.sys.qseelogd=true
 persist.logd.size=8M
 
 # FUSE passthrough
@@ -13,10 +12,3 @@ ro.charger.enable_suspend=1
 
 # ADB
 ro.adb.secure=0
-
-# Haptics
-ro.odm.mm.vibrator.si_sys_path=/sys/bus/i2c/drivers/sih_haptic_688X/7-006b
-ro.odm.mm.vibrator.sys_path=/sys/bus/i2c/drivers/awinic_haptic/7-005a
-ro.odm.mm.vibrator.device_type=ff
-ro.odm.mm.vibrator.resonant_frequency=170
-ro.odm.mm.vibrator.slide_effect_protect_time=20
