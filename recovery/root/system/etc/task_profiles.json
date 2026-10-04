@@ -250,7 +250,7 @@
           "Name" : "JoinCgroup",
           "Params" :
           {
-            "Controller": "schedtune",
+            "Controller": "cpu",
             "Path": "audio-app"
           }
         }
@@ -670,11 +670,11 @@
       "Name": "PerfBoost",
       "Actions": [
         {
-          "Name": "SetClamps",
+          "Name": "SetAttribute",
           "Params":
           {
-            "Boost": "50%",
-            "Clamp": "0"
+            "Name": "UClampMin",
+            "Value": "50"
           }
         }
       ]
@@ -683,11 +683,11 @@
       "Name": "PerfClamp",
       "Actions": [
         {
-          "Name": "SetClamps",
+          "Name": "SetAttribute",
           "Params":
           {
-            "Boost": "0",
-            "Clamp": "30%"
+            "Name": "UClampMax",
+            "Value": "30"
           }
         }
       ]

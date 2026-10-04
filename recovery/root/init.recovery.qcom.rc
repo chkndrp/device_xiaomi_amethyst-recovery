@@ -16,7 +16,13 @@ on early-init
     write /sys/bus/platform/devices/1d84000.ufshc/enable_wb_buf_flush 0
 
 on early-init
-    # Setup cpusets for task profiles
+    # Setup cpuctl/cpusets for task profiles
+    mkdir /dev/cpuctl/foreground 0775 system system
+    mkdir /dev/cpuctl/background 0775 system system
+    mkdir /dev/cpuctl/top-app 0775 system system
+    mkdir /dev/cpuctl/system-background 0775 system system
+    mkdir /dev/cpuctl/rt 0775 system system
+
     mkdir /dev/cpuset/foreground 0775 system system
     mkdir /dev/cpuset/background 0775 system system
     mkdir /dev/cpuset/system-background 0775 system system
