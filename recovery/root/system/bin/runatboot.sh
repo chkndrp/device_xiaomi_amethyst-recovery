@@ -5,7 +5,7 @@
 
 # Load batterysecret and kickstart touchfeature if not running
 QCOM_BATTERY_DIR="/sys/class/qcom-battery"
-TOUCH_SVC_STATUS=$(getprop init.svc.touchfeature-service)
+TOUCH_SVC_STATUS=$(resetprop init.svc.touchfeature-service)
 
 LOGMSG() {
 	echo "I:$1" >> /tmp/recovery.log;
@@ -15,12 +15,12 @@ LOGMSG() {
     while [ ! -d "$QCOM_BATTERY_DIR" ]; 
         do sleep 1
     done
-    setprop vendor.qcom_battery.initialized true
+    resetprop vendor.qcom_battery.initialized true
 ) &
 
 if [ "$TOUCH_SVC_STATUS" != "running" ]; 
     then 
-        setprop ctl.start touchfeature-service
+        resetprop ctl.start touchfeature-service
         LOGMSG "Forced touchfeature service start"
 fi
 
