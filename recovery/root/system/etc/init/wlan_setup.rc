@@ -1,0 +1,12 @@
+# Copyright (C) 2026 chkndrp
+# SPDX-License-Identifier: GPL-3.0-only
+
+service wlan_setup /system/bin/wlan_setup.sh
+    user root
+    group root wifi
+    priority -5
+    ioprio rt 5
+    seclabel u:r:recovery:s0
+    task_profiles CPUSET_SP_TOP_APP
+    oneshot
+    disabled

@@ -1,0 +1,36 @@
+# Copyright (C) 2026 chkndrp
+# SPDX-License-Identifier: GPL-3.0-only
+
+on property:twrp.firmware.mounted=true && property:ro.twrp.fastbootd=0
+    start wlan_setup
+
+on property:twrp.wlan.drivers.loaded=true
+    write /dev/kmsg "[wlan] booting & starting vendor services"
+
+    wait /sys/kernel/icnss/wlan_en_delay 10
+    write /sys/kernel/icnss/wlan_en_delay 1000
+
+    wait /sys/kernel/icnss/wpss_boot 10
+    write /sys/kernel/icnss/wpss_boot 1
+
+    # NV/EFS storage bridge
+    start vendor.rmt_storage
+
+    # Peripheral Manager for modem/wcnss
+    start vendor.pd-mapper
+    start vendor.pm-service
+    start vendor.pm-proxy
+
+on post-fs-data
+    # WLAN management and calibration daemon
+    start vendor.cnss-daemon
+
+on property:sys.fox.wlan.up=1
+    write /dev/kmsg "[wlan] starting wpa_supplicant"
+    mkdir /tmp/recovery 0777 root root
+    mkdir /tmp/recovery/sockets 0777 root root
+
+    restart wpa_supplicant
+
+    # Reset so the next tap is a fresh 0->1 transition that re-fires this block.
+    setprop sys.fox.wlan.up 0

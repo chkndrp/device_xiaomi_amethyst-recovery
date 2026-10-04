@@ -50,5 +50,8 @@ OF_ENABLE_FRP_ADDON := 1
 # This device uses AIDL boot service
 OF_USE_AIDL_BOOT_CONTROL := 1
 
+# Enable Wi-Fi support in recovery
+OF_ENABLE_WLAN := 1
+
 # Debugging
 # OF_REPORT_HARMLESS_MOUNT_ISSUES=1

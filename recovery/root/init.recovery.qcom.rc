@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
 import init.recovery.encryption.rc
+import init.recovery.wlan.rc
 
 on early-init
     loglevel 7

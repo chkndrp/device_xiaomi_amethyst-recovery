@@ -10,5 +10,6 @@ persist.sys.fuse.passthrough.enable=true
 # Charger suspend 
 ro.charger.enable_suspend=1
 
-# ADB
+# ADB / Wireless ADB
 ro.adb.secure=0
+service.adb.tcp.port=5555

@@ -1,0 +1,15 @@
+# Copyright (C) 2025 The Android Open Source Project
+# Copyright (C) 2026 chkndrp
+# SPDX-License-Identifier: Apache-2.0
+
+# Do NOT run the rmt_storage binary directly unless
+# you want to end up with broken EFS/Modem!
+
+service vendor.rmt_storage /vendor/bin/rmt_storage_ro.sh
+    user root
+    group system wakelock
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib64/hw:/system/lib64:/vendor/odm/lib64:/bin
+    seclabel u:r:recovery:s0
+    task_profiles CPUSET_SP_FOREGROUND
+    namespace mnt
+    disabled

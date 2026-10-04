@@ -1,0 +1,11 @@
+# Copyright (C) 2025 The Android Open Source Project
+# Copyright (C) 2026 chkndrp
+# SPDX-License-Identifier: Apache-2.0
+
+service vendor.pd-mapper /vendor/bin/pd-mapper
+    user system
+    group system wifi
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib64/hw:/system/lib64:/vendor/odm/lib64:/bin
+    seclabel u:r:recovery:s0
+    task_profiles CPUSET_SP_FOREGROUND
+    disabled
