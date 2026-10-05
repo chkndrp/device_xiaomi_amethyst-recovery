@@ -110,9 +110,6 @@ TW_FRAMERATE            := 120
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_USE_SERIALNO_PROPERTY_FOR_DEVICE_ID := true
 
-# May be causing power button issues.
-TW_INPUT_BLACKLIST := "uinput-goodix"
-
 # TWRP - Modules
 TW_LOAD_VENDOR_MODULES  += "panel_event_notifier.ko xiaomi_touch.ko goodix_core.ko
 TW_LOAD_VENDOR_MODULES  += focaltech_touch.ko adsp_loader_dlkm.ko
