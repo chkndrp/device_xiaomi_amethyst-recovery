@@ -12,7 +12,7 @@ on property:vendor.sys.listeners.registered=true
     start vendor.gatekeeper-qti
 
 # Runs during post-fs-data
-on property:ro.crypto.state=encrypted && property:twrp.firmware.mounted=true
+on property:vendor.sys.listeners.registered=true && property:ro.crypto.state=encrypted
     start vendor.keymint-strongbox
     start vendor.weaver
     start vendor.secure_element
@@ -35,25 +35,13 @@ on property:twrp.all.users.decrypted=true
 on property:twrp.all.users.decrypted=true
     setprop twrp.firmware.mounted false
 
-    write /sys/bus/platform/devices/1d84000.ufshc/auto_hibern8 10000
-    write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 1
-    write /sys/bus/platform/devices/1d84000.ufshc/enable_wb_buf_flush 1
-
 # Runs after decryption, but only if user has second space/dual apps
 on property:twrp.decrypt.done=true && property:twrp.user.999.decrypt=0
     setprop twrp.firmware.mounted false
 
-    write /sys/bus/platform/devices/1d84000.ufshc/auto_hibern8 10000
-    write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 1
-    write /sys/bus/platform/devices/1d84000.ufshc/enable_wb_buf_flush 1
-
 # Runs if decryption failed/was canceled
 on property:of_decryption_failed=true
     setprop twrp.firmware.mounted false
-
-    write /sys/bus/platform/devices/1d84000.ufshc/auto_hibern8 10000
-    write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 1
-    write /sys/bus/platform/devices/1d84000.ufshc/enable_wb_buf_flush 1
 
 # Runs if the current boot mode is fastbootd
 on property:ro.twrp.fastbootd=1 && property:twrp.firmware.mounted=true
@@ -63,5 +51,9 @@ on property:ro.twrp.fastbootd=1 && property:twrp.firmware.mounted=true
 on property:twrp.firmware.mounted=false && property:twrp.firmware.umounted=
     umount /vendor/firmware_mnt
     umount /mnt/vendor/persist
+
+    write /sys/bus/platform/devices/1d84000.ufshc/auto_hibern8 10000
+    write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 1
+    write /sys/bus/platform/devices/1d84000.ufshc/enable_wb_buf_flush 1
 
     setprop twrp.firmware.umounted true
