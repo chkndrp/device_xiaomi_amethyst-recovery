@@ -2,12 +2,6 @@
 # Copyright (C) 2026 chkndrp
 # SPDX-License-Identifier: Apache-2.0
 
-on fs
-    chmod 0660 /dev/qseecom
-    chown system drmrpc /dev/qseecom
-    chmod 0664 /dev/ion
-    chown system system /dev/ion
-
 service vendor.qseecomd /vendor/bin/qseecomd
     user root
     group root drmrpc
