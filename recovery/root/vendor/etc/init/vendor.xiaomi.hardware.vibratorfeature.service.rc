@@ -3,12 +3,6 @@
 # SPDX-License-Identifier: Apache-2.0
 
 on boot
-    chown system system /sys/bus/i2c/drivers/awinic_haptic/7-005a/f0_save
-    chown system system /sys/bus/i2c/drivers/awinic_haptic/7-005a/osc_save
-    chown system system /sys/bus/i2c/drivers/awinic_haptic/7-005a/custom_wave
-    chmod 0666 /sys/bus/i2c/drivers/awinic_haptic/7-005a/custom_wave
-
-    setprop vendor.haptic.calibrate.done 1
     start vibratorfeature-service
 
 service vibratorfeature-service /vendor/bin/hw/vendor.xiaomi.hardware.vibratorfeature.service
