@@ -14,8 +14,8 @@ on property:vendor.sys.listeners.registered=true
 # Runs during post-fs-data
 on property:vendor.sys.listeners.registered=true && property:ro.crypto.state=encrypted
     start vendor.keymint-strongbox
-    start vendor.weaver
     start vendor.secure_element
+    start vendor.weaver
 
 # Runs after decryption
 on property:twrp.all.users.decrypted=true
