@@ -41,7 +41,8 @@ backup_fox() {
 		[ -n "$x" ] && return; # standard payload.bin - no need for a backup
 	fi
 
-	source="/dev/block/bootdevice/by-name/recovery";
+	slot=$(resetprop ro.boot.slot_suffix)
+	source="/dev/block/bootdevice/by-name/recovery$slot";
 	destination="/tmp/fox_backup.img";
 
 	if [ ! -f $destination ]; then
