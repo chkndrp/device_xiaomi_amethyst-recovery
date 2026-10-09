@@ -10,33 +10,76 @@
 FDEVICE="amethyst"
 
 fox_get_target_device() {
-    local chkdev=""
-    
+    local src=""
+
     if [ -n "$ZSH_VERSION" ]; 
-      then
-        local current_source="${(%):-%x}"
-        chkdev=$(echo "$current_source" | grep -w "$FDEVICE")
+      then src="${(%):-%x}"
     elif [ -n "$BASH_VERSION" ];
-      then chkdev=$(echo "$BASH_SOURCE" | grep -w "$FDEVICE")
+      then src="${BASH_SOURCE[0]}"
+    else src="$0"
     fi
 
-    if [ -n "$chkdev" ]; 
+    if echo "$src" | grep -q "$FDEVICE"; 
       then FOX_BUILD_DEVICE="$FDEVICE"
-    else
-        if [ -n "$BASH_VERSION" ]; 
-          then chkdev=$(set | grep BASH_ARGV | grep -w "$FDEVICE")
-        elif [ -n "$ZSH_VERSION" ]; 
-          then chkdev=$(echo "$*" | grep -w "$FDEVICE")
-        fi
-        [ -n "$chkdev" ] && FOX_BUILD_DEVICE="$FDEVICE"
+    elif [ -n "$BASH_VERSION" ] && set | grep BASH_ARGV | grep -q -w "$FDEVICE";
+      then FOX_BUILD_DEVICE="$FDEVICE"
+    elif echo "$* $0" | grep -q -w "$FDEVICE"; 
+      then FOX_BUILD_DEVICE="$FDEVICE"
     fi
 }
 
-if [ -z "$1" -a -z "$FOX_BUILD_DEVICE" ]; 
-  then fox_get_target_device
+fetch_latest_magisk() {
+    local magisk_dir magisk_tag magisk_file local_zip
+
+    _find_zip() { 
+      find "$magisk_dir" \
+        -maxdepth 1 -type f -name "*.zip" \
+        -size +0 "$@" -print -quit
+    }
+
+    magisk_dir="${XDG_CACHE_HOME:-$HOME/.cache}/ofrp_magisk"
+    mkdir -p "$magisk_dir"
+
+    if [ -z "$FOX_BUILD_TYPE" ]; 
+      then local_zip=$(_find_zip -mtime -14)
+    fi
+    if [ -z "$local_zip" ];
+      then magisk_tag=$(gh release view --repo topjohnwu/Magisk --json tagName -q .tagName 2>/dev/null)
+    fi
+
+    if [ -n "$magisk_tag" ];
+      then
+        magisk_file="${magisk_dir}/Magisk-${magisk_tag}.zip"
+
+        if [ ! -s "$magisk_file" ];
+          then
+            echo "I: Downloading new Magisk release (${magisk_tag})..."
+            curl -sL \
+              "https://github.com/topjohnwu/Magisk/releases/download/${magisk_tag}/Magisk-${magisk_tag}.apk" \
+              -o "$magisk_file"
+        fi
+        if [ -s "$magisk_file" ];
+          then
+            _find_zip ! -name "$(basename "$magisk_file")" -delete >/dev/null 2>&1
+            local_zip=$(_find_zip -name "$(basename "$magisk_file")")
+        fi
+    fi
+
+    : "${local_zip:=$(_find_zip)}"
+    if [ -n "$local_zip" ];
+      then
+        export FOX_USE_SPECIFIC_MAGISK_ZIP="$local_zip"
+        echo "I: Using Magisk zip: $FOX_USE_SPECIFIC_MAGISK_ZIP"
+      else
+        unset FOX_USE_SPECIFIC_MAGISK_ZIP
+    fi
+}
+
+if [ -z "$1" ] && [ -z "$FOX_BUILD_DEVICE" ]; 
+  then fox_get_target_device "$@"
 fi
 
-if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ];
+if [ "$1" = "$FDEVICE" ] || [ "$FOX_BUILD_DEVICE" = "$FDEVICE" ];
   then
     export TARGET_DEVICE_ALT="amethyst"
 
@@ -88,8 +131,8 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ];
     # Warn if CCACHE_DIR is an invalid directory
     if [ $USE_CCACHE = 1 ] && [ ! -d ${CCACHE_DIR} ];
      then
-       echo "CCACHE Directory/Partition is not mounted at \"${CCACHE_DIR}\""
-       echo "Please edit the CCACHE_DIR build variable or mount the directory."
+       echo "W: CCACHE Directory/Partition is not mounted at \"${CCACHE_DIR}\""
+       echo "W: Please edit the CCACHE_DIR build variable or mount the directory."
     fi
 
     export LC_ALL="C"
@@ -99,8 +142,15 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ];
     # Debugging
     ## export FOX_RESET_SETTINGS=0
     ## export FOX_INSTALLER_DEBUG_MODE=1
+
+    if command -v gh > /dev/null 2>&1; 
+      then fetch_latest_magisk
+      else 
+        echo "W: Fetching magisk skipped. Install GitHub CLI"
+        unset FOX_USE_SPECIFIC_MAGISK_ZIP
+    fi
   else
     if [ -z "$FOX_BUILD_DEVICE" ] && [ -z "$BASH_SOURCE" ] && [ -z "$ZSH_VERSION" ]; 
-      then echo "I: This script requires bash or zsh. Not processing $FDEVICE"
+      then echo "W: This script requires bash or zsh. Not processing $FDEVICE"
     fi
 fi
