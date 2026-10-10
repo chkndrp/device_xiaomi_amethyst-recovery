@@ -9,13 +9,6 @@ on early-init
     write /sys/fs/selinux/enforce 0
 
 on early-init
-    # UFS Tuning
-    wait /sys/bus/platform/devices/1d84000.ufshc
-    write /sys/bus/platform/devices/1d84000.ufshc/auto_hibern8 0
-    write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 0
-    write /sys/bus/platform/devices/1d84000.ufshc/enable_wb_buf_flush 0
-
-on early-init
     # Setup cpuctl/cpusets for task profiles
     mkdir /dev/cpuctl/foreground 0775 system system
     mkdir /dev/cpuctl/background 0775 system system
@@ -39,6 +32,13 @@ on early-init
     write /dev/cpuset/background/mems 0
     write /dev/cpuset/restricted/cpus 0-3
     write /dev/cpuset/restricted/mems 0
+
+on property:twrp.modules.loaded=true && property:twrp.firmware.loaded=
+    # UFS Tuning
+    wait /sys/bus/platform/devices/1d84000.ufshc
+    write /sys/bus/platform/devices/1d84000.ufshc/auto_hibern8 0
+    write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 0
+    write /sys/bus/platform/devices/1d84000.ufshc/enable_wb_buf_flush 0
 
 on property:twrp.modules.loaded=true && property:twrp.firmware.loaded=
     mkdir /mnt/vendor 0775 system system
