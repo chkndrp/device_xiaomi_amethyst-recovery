@@ -29,8 +29,6 @@ on property:twrp.all.users.decrypted=true
     stop vendor.ssgtzd
     stop vendor.gatekeeper-qti
 
-    setprop twrp.firmware.mounted false
-
 # Runs after decryption
 on property:twrp.all.users.decrypted=true
     setprop twrp.firmware.mounted false
