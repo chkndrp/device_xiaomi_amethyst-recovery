@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
 # Wait for firmware mount before starting qseecomd
-on property:twrp.firmware.mounted=true
+on property:twrp.firmware.mounted=true && property:ro.twrp.fastbootd=0
     start vendor.qseecomd
 
 # Runs after qseecomd starts
