@@ -106,6 +106,7 @@ if [ "$1" = "$FDEVICE" ] || [ "$FOX_BUILD_DEVICE" = "$FDEVICE" ];
     # Addons
     export FOX_ENABLE_APP_MANAGER=1
     export FOX_DELETE_AROMAFM=1
+    export FOX_NO_BLANK_DT2W=1
 
     # Magisk / KernelSU(-Next) / SukiSU support
     export FOX_ENABLE_KERNELSU_SUPPORT=1
