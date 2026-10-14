@@ -138,7 +138,7 @@ if [ "$1" = "$FDEVICE" ] || [ "$FOX_BUILD_DEVICE" = "$FDEVICE" ];
 
     export LC_ALL="C"
     export BUILD_USERNAME=chkndrp
-    export BUILD_HOSTNAME=github
+    export BUILD_HOSTNAME=orangefox
 
     # Debugging
     ## export FOX_RESET_SETTINGS=0
