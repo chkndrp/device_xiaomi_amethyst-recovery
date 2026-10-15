@@ -125,7 +125,6 @@ TW_BRIGHTNESS_PATH := \
 # TWRP - Haptics
 TW_SUPPORT_INPUT_AIDL_HAPTICS := true
 TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/vibratorfeature"
-TW_SUPPORT_INPUT_AIDL_HAPTICS_FIX_OFF := true
 
 # TWRP - Crypto
 TW_INCLUDE_CRYPTO               := true
