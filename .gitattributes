@@ -1,4 +1,4 @@
-* text=auto eol=lf
+* filter=tab-to-space text=auto eol=lf
 
 prebuilt/kernel binary
 recovery/root/vendor/bin/* binary
