@@ -6,5 +6,13 @@ recovery/root/vendor/bin/hw/* binary
 
 *.so binary
 *.bin binary
+
+*.elf binary
+*.msc binary
+*.qdb binary
+*.ta binary
+*.tz binary
+*.mbn binary
 *.mdt binary
 *.b[0-9]* binary
+*.e[0-9]* binary
