@@ -1,8 +1,8 @@
 gitlab:
   enabled: true
-  owner: 'chkndrp'
-  repo: 'device_xiaomi_amethyst-recovery'
-  projectId: 86680464
+  owner: 'OrangeFox'
+  repo: 'device/amethyst'
+  projectId: 87619307
   sync:
     branches:
       enabled: true
