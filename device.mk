@@ -39,12 +39,13 @@ PRODUCT_PACKAGES += \
 
 # Some vendor HALs expect firmware to be elsewhere
 BOARD_ROOT_EXTRA_SYMLINKS += \
-    /vendor/odm/firmware:/vendor/odm/firmware/p16u
+    /odm:/vendor/odm \
+    /odm/firmware:/odm/firmware/p16u
 
 # WLAN related binaries may expect configuration to be elsewhere
 BOARD_ROOT_EXTRA_SYMLINKS += \
     /vendor/etc/wifi/qca6750/WCNSS_qcom_cfg.ini:/vendor/firmware/wlan/qca_cld/qca6750/WCNSS_qcom_cfg.ini \
-    /vendor/etc/wifi/qca6750/WCNSS_qcom_cfg.ini:/vendor/odm/firmware/wlan/qca_cld/qca6750/WCNSS_qcom_cfg.ini
+    /vendor/etc/wifi/qca6750/WCNSS_qcom_cfg.ini:/odm/firmware/wlan/qca_cld/qca6750/WCNSS_qcom_cfg.ini
 
 # API
 PRODUCT_SHIPPING_API_LEVEL  := 34

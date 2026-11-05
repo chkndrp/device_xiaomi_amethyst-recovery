@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import /vendor/etc/ueventd.rc
-import /vendor/odm/etc/ueventd.rc
+import /odm/etc/ueventd.rc
 
 uevent_socket_rcvbuf_size 16M
 

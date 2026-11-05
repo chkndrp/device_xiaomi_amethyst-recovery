@@ -9,7 +9,7 @@ service vendor.health-qti /vendor/bin/hw/android.hardware.health-service.qti
     user system
     group system
     file /dev/kmsg w
-    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib64/hw:/system/lib64:/bin
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib64/hw:/system/lib64:/odm/lib64:/bin
     seclabel u:r:recovery:s0
     task_profiles ServiceCapacityLow
     disabled

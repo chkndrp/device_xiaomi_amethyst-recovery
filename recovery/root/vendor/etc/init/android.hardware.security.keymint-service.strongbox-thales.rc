@@ -6,7 +6,7 @@ service vendor.keymint-strongbox /vendor/bin/hw/android.hardware.security.keymin
     interface aidl android.hardware.security.sharedsecret.ISharedSecret/strongbox
     user root
     group root system wakelock
-    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib64/hw:/system/lib64:/bin
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib64/hw:/system/lib64:/odm/lib64:/bin
     seclabel u:r:recovery:s0
     task_profiles CPUSET_SP_FOREGROUND
     disabled
