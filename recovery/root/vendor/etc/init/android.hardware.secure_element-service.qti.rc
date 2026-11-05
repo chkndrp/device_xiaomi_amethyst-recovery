@@ -6,7 +6,7 @@ service vendor.secure_element /vendor/bin/hw/android.hardware.secure_element-ser
     interface aidl android.hardware.secure_element.ISecureElement/eSE1
     user system
     group nfc root
-    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib64/hw:/system/lib64:/bin
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib64/hw:/system/lib64:/odm/lib64:/bin
     seclabel u:r:recovery:s0
     task_profiles CPUSET_SP_FOREGROUND
     disabled

@@ -39,7 +39,8 @@ PRODUCT_PACKAGES += \
 
 # Some vendor HALs expect firmware to be elsewhere
 BOARD_ROOT_EXTRA_SYMLINKS += \
-    /vendor/odm/firmware:/vendor/odm/firmware/p16u
+    /odm:/vendor/odm \
+    /odm/firmware:/odm/firmware/p16u
 
 # API
 PRODUCT_SHIPPING_API_LEVEL  := 34

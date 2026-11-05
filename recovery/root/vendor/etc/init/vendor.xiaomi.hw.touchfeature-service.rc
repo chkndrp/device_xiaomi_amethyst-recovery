@@ -12,7 +12,7 @@ on init
 service touchfeature-service /vendor/bin/hw/vendor.xiaomi.hw.touchfeature-service
     user root
     group root system input
-    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib64/hw:/system/lib64:/vendor/odm/lib64:/bin
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib64/hw:/system/lib64:/odm/lib64:/bin
     seclabel u:r:recovery:s0
     task_profiles CPUSET_SP_TOP_APP
     priority -10
