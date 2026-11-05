@@ -1,0 +1,6 @@
+# Copyright (C) 2026 chkndrp
+# SPDX-License-Identifier: GPL-3.0-only
+
+service charger /system/bin/charger
+    override
+    disabled
