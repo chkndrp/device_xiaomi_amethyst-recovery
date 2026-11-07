@@ -35,6 +35,9 @@ Display                 | 6.67" CrystalRes AMOLED, 120Hz, 1220x2712
 - [x] Custom splash
 
 ## How to build
+OrangeFox provides a guide to syncing and building the recovery at this page [here](https://wiki.orangefox.tech/dev/building).
+For support with building, refer to [their discord server](https://discord.gg/GpYTArw22N) after reading the [rules](https://wiki.orangefox.tech/telegram_rules).
+
 This recovery tree was initially made for `amethyst`. For historical purposes,
 build the `twrp_amethyst` target
 
